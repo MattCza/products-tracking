@@ -19,6 +19,6 @@ public class UserService {
 
     public Boolean uniqueEmail (User user){
         Optional<User> userFromDb = userRepository.findByEmail(user.getEmail());
-        return userFromDb.isEmpty();
+        return userFromDb.isPresent();
     }
 }
