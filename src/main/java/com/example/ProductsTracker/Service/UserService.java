@@ -17,8 +17,7 @@ public class UserService {
     public List<User> getAllUsers(){ return userRepository.findAll(); }
     public User saveUser(User user) {return userRepository.save(user);}
 
-    public Boolean uniqueEmail (User user){
-        Optional<User> userFromDb = userRepository.findByEmail(user.getEmail());
-        return userFromDb.isPresent();
+    public Optional<User> findUserFromDbByEmail(User user){
+        return userRepository.findByEmail(user.getEmail());
     }
 }
