@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -21,24 +20,18 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<User> saveUser(@RequestBody User user){
-        if(userService.findUserFromDbByEmail(user).isPresent()){
+        if(userService.isUserPresentInDb(user)){
             return new ResponseEntity<User>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
         return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody User user) {
-        Optional<User> userFromDb = userService.findUserFromDbByEmail(user);
-
-        if (userFromDb.isEmpty() || wrongPassword(userFromDb, user)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    public ResponseEntity login(@RequestBody User user){
+        if (userService.isUserPresentInDb(user) || userService.isPasswordCorrect(user)) {
+            return ResponseEntity.status(HttpStatus.OK).build();
         }
-
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    private boolean wrongPassword(Optional<User> userFromDb, User user) {
-        return !userFromDb.get().getPassword().equals(user.getPassword());
-    }
 }
