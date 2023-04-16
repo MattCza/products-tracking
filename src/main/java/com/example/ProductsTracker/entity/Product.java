@@ -19,9 +19,11 @@ public class Product {
     @NonNull
     @Column(name = "name")
     private String name;
-//    @Column(name = "price")
-//    private double price;
-//    @Column(name = "discount")
-//    private boolean discount;
+    @NonNull
+    @Column(name = "price")
+    private Double price;
+    @NonNull
+    @Column(name = "discount")
+    private Boolean discount;
 
 }
