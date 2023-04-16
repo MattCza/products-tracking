@@ -5,5 +5,6 @@ Tech used:
 Hibernate  
 Spring JPA  
 MySQL - Docker  
-Spring Security  
 Postman  
+
+TODO: Spring Security or some frontend or whatever.
