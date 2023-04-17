@@ -7,4 +7,7 @@ Spring JPA
 MySQL - Docker  
 Postman  
 
-TODO: Spring Security or some frontend or whatever.
+TODO:  
+User Authentication - and store hashed password in DB and - DONE. But it can be done better.  
+Add users roles  
+then allow users for actions based on their roles.  
