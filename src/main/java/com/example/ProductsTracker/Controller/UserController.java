@@ -20,15 +20,15 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<User> saveUser(@RequestBody User user){
-        if(userService.isUserPresentInDb(user)){
+        if(userService.isUserPresentInDb(user.getEmail())){
             return new ResponseEntity<User>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
         return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody User user){
-        if (userService.isUserPresentInDb(user) || userService.isPasswordCorrect(user)) {
+    public ResponseEntity login(@RequestParam("email") String email, @RequestParam("password") String password){
+        if (userService.authenticationUser(email, password)) {
             return ResponseEntity.status(HttpStatus.OK).build();
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

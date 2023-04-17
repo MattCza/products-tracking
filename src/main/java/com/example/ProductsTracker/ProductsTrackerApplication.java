@@ -13,15 +13,15 @@ public class ProductsTrackerApplication {
 		SpringApplication.run(ProductsTrackerApplication.class, args);
 	}
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/users").allowedOrigins("http://localhost:3000");
-				registry.addMapping("/login").allowedOrigins("http://localhost:3000");
-				registry.addMapping("/products").allowedOrigins("http://localhost:3000");
-			}
-		};
-	}
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurer() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/users").allowedOrigins("http://localhost:3000");
+//				registry.addMapping("/login").allowedOrigins("http://localhost:3000");
+//				registry.addMapping("/products").allowedOrigins("http://localhost:3000");
+//			}
+//		};
+//	}
 }
