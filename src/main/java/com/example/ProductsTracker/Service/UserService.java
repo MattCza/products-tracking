@@ -10,6 +10,8 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+    private static final String PEPPER = "g00d p3pp3r 15 n07 84d";
+    private final BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
     private UserRepository userRepository;
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
@@ -19,7 +21,10 @@ public class UserService {
 
 
     public List<User> getAllUsers(){ return userRepository.findAll(); }
-    public User saveUser(User user) {return userRepository.save(user);}
+    public User saveUser(User user) {
+        user.setPassword(bCrypt.encode(user.getPassword() + PEPPER));
+        return userRepository.save(user);
+    }
 
 
 
@@ -34,8 +39,7 @@ public class UserService {
 
     public Boolean authenticationUser(String email, String password){
         Optional<User> userFromDb = userRepository.findByEmail(email);
-        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-        return userFromDb.map(user -> bCrypt.matches(password, user.getPassword())).orElse(false);
+        return userFromDb.map(user -> bCrypt.matches(password + PEPPER, user.getPassword())).orElse(false);
     }
 
 
