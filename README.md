@@ -8,6 +8,10 @@ MySQL - Docker
 Postman  
 
 TODO:  
-User Authentication - and store hashed password in DB and - DONE. But it can be done better.  
-Add users roles  
+CRUD operations for Users - DONE.  
+User Authentication - and store hashed password in DB and - DONE.  
+Make better configuration.  
+Create Products Entity.  
+One-To-Many Relationship with Users.  
+Add users roles.  
 then allow users for actions based on their roles.  
