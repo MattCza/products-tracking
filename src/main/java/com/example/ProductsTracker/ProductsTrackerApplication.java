@@ -9,19 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class ProductsTrackerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProductsTrackerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ProductsTrackerApplication.class, args);
+    }
 
-//	@Bean
-//	public WebMvcConfigurer corsConfigurer() {
-//		return new WebMvcConfigurer() {
-//			@Override
-//			public void addCorsMappings(CorsRegistry registry) {
-//				registry.addMapping("/users").allowedOrigins("http://localhost:3000");
-//				registry.addMapping("/login").allowedOrigins("http://localhost:3000");
-//				registry.addMapping("/products").allowedOrigins("http://localhost:3000");
-//			}
-//		};
-//	}
 }

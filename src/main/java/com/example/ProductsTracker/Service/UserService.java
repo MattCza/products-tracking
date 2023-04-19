@@ -1,5 +1,6 @@
 package com.example.ProductsTracker.Service;
 
+import com.example.ProductsTracker.Exception.UserNotFoundException;
 import com.example.ProductsTracker.Repository.UserRepository;
 import com.example.ProductsTracker.Entity.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,27 +15,60 @@ public class UserService {
     private final BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers(){ return userRepository.findAll(); }
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User", "ID", id));
+    }
+
     public User saveUser(User user) {
-        StringBuilder stringBuilder = new StringBuilder(user.getPassword());
-        stringBuilder.append(PEPPER);
-        user.setPassword(bCrypt.encode(stringBuilder));
+        user.setPassword(bCrypt.encode(passwordGeneration(user.getPassword())));
         return userRepository.save(user);
     }
 
-    public Boolean isUserPresentInDb(String email){
+    public Boolean isUserPresentInDb(String email) {
         Optional<User> userFromDb = userRepository.findByEmail(email);
         return userFromDb.isPresent();
     }
 
-    public Boolean authenticationUser(String email, String password){
+    public Boolean authenticationUser(String email, String password) {
         Optional<User> userFromDb = userRepository.findByEmail(email);
+        return userFromDb.map(user -> bCrypt.matches(passwordGeneration(password), user.getPassword())).orElse(false);
+    }
+
+    public User patchUser(User user, Long id) {
+        User currentUser = getUserById(id);
+        currentUser.setEmail(user.getEmail());
+        currentUser.setPassword(passwordGeneration(user.getPassword()));
+
+        if (user.getFirstName() != null) {
+            currentUser.setFirstName(user.getFirstName());
+        }
+        if (user.getLastName() != null) {
+            currentUser.setLastName(user.getLastName());
+        }
+
+        saveUser(currentUser);
+        return currentUser;
+    }
+
+    public void deleteUser(Long id){
+        getUserById(id);
+        userRepository.deleteById(id);
+    }
+
+
+    private String passwordGeneration(String password) {
         StringBuilder stringBuilder = new StringBuilder(password);
-        return userFromDb.map(user -> bCrypt.matches(stringBuilder.append(PEPPER), user.getPassword())).orElse(false);
+        stringBuilder.append(PEPPER);
+        return bCrypt.encode(stringBuilder);
     }
 
 
