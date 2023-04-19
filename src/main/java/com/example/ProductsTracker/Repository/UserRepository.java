@@ -1,6 +1,6 @@
 package com.example.ProductsTracker.Repository;
 
-import com.example.ProductsTracker.entity.User;
+import com.example.ProductsTracker.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

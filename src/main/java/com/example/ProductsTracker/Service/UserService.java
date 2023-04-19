@@ -1,7 +1,7 @@
 package com.example.ProductsTracker.Service;
 
 import com.example.ProductsTracker.Repository.UserRepository;
-import com.example.ProductsTracker.entity.User;
+import com.example.ProductsTracker.Entity.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,24 +12,18 @@ import java.util.Optional;
 public class UserService {
     private static final String PEPPER = "g00d p3pp3r 15 n07 84d";
     private final BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
     }
 
-
-
-
     public List<User> getAllUsers(){ return userRepository.findAll(); }
     public User saveUser(User user) {
-        user.setPassword(bCrypt.encode(user.getPassword() + PEPPER));
+        StringBuilder stringBuilder = new StringBuilder(user.getPassword());
+        stringBuilder.append(PEPPER);
+        user.setPassword(bCrypt.encode(stringBuilder));
         return userRepository.save(user);
-    }
-
-
-
-    private Optional<User> getUserFromDb(User user){
-        return userRepository.findByEmail(user.getEmail());
     }
 
     public Boolean isUserPresentInDb(String email){
@@ -39,7 +33,8 @@ public class UserService {
 
     public Boolean authenticationUser(String email, String password){
         Optional<User> userFromDb = userRepository.findByEmail(email);
-        return userFromDb.map(user -> bCrypt.matches(password + PEPPER, user.getPassword())).orElse(false);
+        StringBuilder stringBuilder = new StringBuilder(password);
+        return userFromDb.map(user -> bCrypt.matches(stringBuilder.append(PEPPER), user.getPassword())).orElse(false);
     }
 
 

@@ -1,29 +1,26 @@
-package com.example.ProductsTracker.entity;
+package com.example.ProductsTracker.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
+@RequiredArgsConstructor
 @Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NonNull
     @ManyToOne
     private User user;
 
-    @NonNull
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
-    @NonNull
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private Double price;
-    @NonNull
-    @Column(name = "discount")
+    @Column(name = "discount", nullable = false)
     private Boolean discount;
 
 }

@@ -1,4 +1,4 @@
-package com.example.ProductsTracker.entity;
+package com.example.ProductsTracker.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,7 +11,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "first_name")
     private String firstName;
