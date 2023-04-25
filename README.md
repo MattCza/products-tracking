@@ -12,12 +12,11 @@ Repository for User Entity - DONE.
 Service (CURD operations) - DONE.  
 Controller (REST API) - DONE.  
 User Authentication - and store hashed password in DB and - DONE.  
-Make better configuration.  
-Backend code in Docker.  
-Tests.  
+Make better configuration. 
+Add users roles.  
 Create Products Entity.  
 One-To-Many Relationship with Users.  
-Add users roles.  
-then allow users for actions based on their roles.  
+Backend code in Docker.  
+Tests.  
 
 Frontend  
