@@ -1,4 +1,4 @@
-package com.example.ProductsTracker.Entity;
+package com.example.ProductsTracker.user;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,5 +1,6 @@
-package com.example.ProductsTracker.Entity;
+package com.example.ProductsTracker.product;
 
+import com.example.ProductsTracker.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

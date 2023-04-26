@@ -37,10 +37,11 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
-			<version>6.0.2</version>
+			<artifactId>spring-security-core</artifactId>
+			<version>6.0.3</version>
 		</dependency>
 
 		<dependency>

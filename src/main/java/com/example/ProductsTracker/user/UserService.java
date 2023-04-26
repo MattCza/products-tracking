@@ -1,8 +1,6 @@
-package com.example.ProductsTracker.Service;
+package com.example.ProductsTracker.user;
 
-import com.example.ProductsTracker.Exception.UserNotFoundException;
-import com.example.ProductsTracker.Repository.UserRepository;
-import com.example.ProductsTracker.Entity.User;
+import com.example.ProductsTracker.exception.UserNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

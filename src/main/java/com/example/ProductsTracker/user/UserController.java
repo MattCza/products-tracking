@@ -1,7 +1,5 @@
-package com.example.ProductsTracker.Controller;
+package com.example.ProductsTracker.user;
 
-import com.example.ProductsTracker.Service.UserService;
-import com.example.ProductsTracker.Entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

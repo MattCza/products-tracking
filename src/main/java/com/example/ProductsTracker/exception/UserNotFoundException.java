@@ -1,4 +1,4 @@
-package com.example.ProductsTracker.Exception;
+package com.example.ProductsTracker.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
