@@ -57,7 +57,7 @@ public class UserService {
         return currentUser;
     }
 
-    public void deleteUser(Integer id){
+    public void deleteUser(Integer id) {
         getUserById(id);
         userRepository.deleteById(id);
     }
