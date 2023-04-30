@@ -21,7 +21,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long id) {
+    public User getUserById(Integer id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User", "ID", id));
     }
@@ -41,7 +41,7 @@ public class UserService {
         return userFromDb.map(user -> bCrypt.matches(passwordGeneration(password), user.getPassword())).orElse(false);
     }
 
-    public User patchUser(User user, Long id) {
+    public User patchUser(User user, Integer id) {
         User currentUser = getUserById(id);
         currentUser.setEmail(user.getEmail());
         currentUser.setPassword(passwordGeneration(user.getPassword()));
@@ -57,7 +57,7 @@ public class UserService {
         return currentUser;
     }
 
-    public void deleteUser(Long id){
+    public void deleteUser(Integer id){
         getUserById(id);
         userRepository.deleteById(id);
     }
