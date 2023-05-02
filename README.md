@@ -4,8 +4,12 @@ REST API for tracking price of bought products.
 Tech used:  
 Hibernate  
 Spring JPA  
+Spring Security  
+JWT token  
 MySQL - Docker  
 Postman  
+
+
 
 TODO:  
 Repository for User Entity - DONE.  
