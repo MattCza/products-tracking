@@ -18,7 +18,6 @@ Controller (REST API) - DONE.
 User Authentication - and store hashed password in DB and - DONE.  
 Add users roles - DONE.  
 Spring security + JWT - DONE.  
-Integrate Security with Project (REST).  
 Make better configuration.  
 
 Create Products Entity.  
