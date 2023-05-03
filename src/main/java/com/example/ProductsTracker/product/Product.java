@@ -14,8 +14,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    private User user;
 
     @Column(name = "name", nullable = false)
     private String name;

@@ -13,23 +13,25 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Entity
+@Table(name = "user",
+        uniqueConstraints = {@UniqueConstraint(name = "user_email_unique", columnNames = "email")})
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
     private Integer id;
-    @Column(name = "email", nullable = false)
+    @Column(nullable = false)
     private String email;
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "password", nullable = false)
+    @Column(nullable = false)
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;

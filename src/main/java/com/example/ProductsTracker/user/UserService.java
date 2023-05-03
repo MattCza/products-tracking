@@ -27,24 +27,24 @@ public class UserService {
     }
 
     public User saveUser(User user) {
-        user.setPassword(bCrypt.encode(passwordGeneration(user.getPassword())));
+        user.setPassword(bCrypt.encode(passwordEncoding(user.getPassword())));
         return userRepository.save(user);
     }
 
     public Boolean isUserPresentInDb(String email) {
-        Optional<User> userFromDb = userRepository.findByEmail(email);
+        Optional<User> userFromDb = userRepository.findUserByEmail(email);
         return userFromDb.isPresent();
     }
 
     public Boolean authenticationUser(String email, String password) {
-        Optional<User> userFromDb = userRepository.findByEmail(email);
-        return userFromDb.map(user -> bCrypt.matches(passwordGeneration(password), user.getPassword())).orElse(false);
+        Optional<User> userFromDb = userRepository.findUserByEmail(email);
+        return userFromDb.map(user -> bCrypt.matches(passwordEncoding(password), user.getPassword())).orElse(false);
     }
 
     public User patchUser(User user, Integer id) {
         User currentUser = getUserById(id);
         currentUser.setEmail(user.getEmail());
-        currentUser.setPassword(passwordGeneration(user.getPassword()));
+        currentUser.setPassword(passwordEncoding(user.getPassword()));
 
         if (user.getFirstName() != null) {
             currentUser.setFirstName(user.getFirstName());
@@ -63,7 +63,7 @@ public class UserService {
     }
 
 
-    private String passwordGeneration(String password) {
+    private String passwordEncoding(String password) {
         StringBuilder stringBuilder = new StringBuilder(password);
         stringBuilder.append(PEPPER);
         return bCrypt.encode(stringBuilder);
